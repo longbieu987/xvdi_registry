@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24 # Ép sử dụng Node 24 để hết bị cảnh báo
       - name: Build # Have to run processing first so the list.json exists to be included in the the deploy
         run: |
           npm ci --prefix processing 
@@ -24,3 +27,4 @@ jobs:
         with:
           branch: gh-pages
           folder: public
+          clean: true
